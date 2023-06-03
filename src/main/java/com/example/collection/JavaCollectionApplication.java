@@ -13,6 +13,7 @@ public class JavaCollectionApplication {
         System.out.println("Tạo ra commit 1");
         System.out.println("tạo ra commit 2");
         System.out.println("tạo ra commit 3");
+        System.out.println("tạo ra commit 4");
     }
 
 }
