@@ -11,6 +11,7 @@ public class JavaCollectionApplication {
         System.out.println("Chào mừng Hoan đến với Collection Java!");
         System.out.println("Test lenh git");
         System.out.println("Tạo ra commit 1");
+        System.out.println("tạo ra commit 2");
     }
 
 }
