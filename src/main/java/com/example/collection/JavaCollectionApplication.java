@@ -13,6 +13,8 @@ public class JavaCollectionApplication {
         System.out.println("test lệnh git reset");
         System.out.println("thay dôi một phát 2 commit nhe!");
         System.out.println("Đây là code nhanh thang 6");
+        System.out.println("Trang an cut");
+        System.out.println("Trang dan");
     }
 
 }
