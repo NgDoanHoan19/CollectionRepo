@@ -13,7 +13,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "employee")
-public class Employee {
+public class Student {
     @Id
     @Column(name = "id")
     private Long employee_id;

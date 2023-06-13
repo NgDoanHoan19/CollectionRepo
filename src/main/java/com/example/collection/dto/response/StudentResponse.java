@@ -1,4 +1,4 @@
 package com.example.collection.dto.response;
 
-public class EmployeeResponse {
+public class StudentResponse {
 }

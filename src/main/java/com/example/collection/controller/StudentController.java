@@ -1,7 +1,7 @@
 package com.example.collection.controller;
 
 
-import com.example.collection.service.EmployeeService;
+import com.example.collection.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/employee")
-public class EmployeeController {
+public class StudentController {
 
-    private final EmployeeService employeeService;
+    private final StudentService studentService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("get-all")
     public ResponseEntity<?> getAll(){
-        return new ResponseEntity(employeeService.getAll(), HttpStatus.OK);
+        return new ResponseEntity(studentService.getAll(), HttpStatus.OK);
     }
 }
