@@ -12,23 +12,32 @@ import lombok.*;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "employee")
+@Table(name = "student")
 public class Student {
     @Id
     @Column(name = "id")
-    private Long employee_id;
+    private Long studentId;
 
-    @Column(name = "employee_name")
-    private String employeeName;
+    @Column(name = "student_name")
+    private String studentName;
+
+    @Column(name = "gender")
+    private String gender;
 
     @Column(name = "age")
     private Integer age;
 
     @Column(name = "email")
-    private String employeeEmail;
+    private String studentEmail;
 
     @Column(name = "address")
-    private String employeeAddress;
+    private String studentAddress;
+
+    @Column(name = "cpa")
+    private Double cpa;
+
+    @Column(name = "classStudent")
+    private String classStudent;
 
     @Column(name = "password")
     private String password;
