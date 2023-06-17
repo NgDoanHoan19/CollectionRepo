@@ -1,9 +1,6 @@
 package com.example.collection.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -16,7 +13,7 @@ import lombok.*;
 public class Student {
     @Id
     @Column(name = "id")
-    private Long studentId;
+    private String studentId;
 
     @Column(name = "student_name")
     private String studentName;
@@ -36,8 +33,11 @@ public class Student {
     @Column(name = "cpa")
     private Double cpa;
 
-    @Column(name = "classStudent")
+    @Column(name = "class_student")
     private String classStudent;
+
+    @Column(name = "user_name")
+    private String userName;
 
     @Column(name = "password")
     private String password;

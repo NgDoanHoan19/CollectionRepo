@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class StudentCreateRequest {
-    private Long studentId;
+    private String studentId;
     private String studentName;
     private String gender;
     private Integer age;
@@ -12,6 +12,7 @@ public class StudentCreateRequest {
     private String studentAddress;
     private Double cpa;
     private String classStudent;
+    private String userName;
     private String password;
 
 }

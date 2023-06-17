@@ -5,7 +5,10 @@ import com.example.collection.entities.Student;
 import com.example.collection.repository.StudentRepository;
 import com.example.collection.service.StudentService;
 import io.micrometer.common.util.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -23,11 +26,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object saveStudent(StudentCreateRequest request) {
-        if(!StringUtils.isEmpty(String.valueOf(request.getStudentId()))){
-
+        if(!StringUtils.isEmpty(request.getStudentId())){
+            if(studentRepository.findById(request.getStudentId()).isPresent()){
+                return null;
+            }
         }
-        return null ;
+        Student student = new Student();
+        student.setStudentId(request.getStudentId());
+        student.setStudentName(request.getStudentName());
+        student.setStudentEmail(request.getStudentEmail());
+        student.setClassStudent(request.getClassStudent());
+        student.setStudentAddress(request.getStudentAddress());
+        student.setGender(request.getGender());
+        student.setAge(request.getAge());
+        student.setCpa(request.getCpa());
+        student.setUserName(request.getUserName());
+        student.setPassword(request.getPassword());
+        studentRepository.save(student);
+        return new ResponseEntity(student, HttpStatus.OK);
     }
 
     @Override

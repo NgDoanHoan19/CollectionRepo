@@ -23,12 +23,12 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createStudent(StudentCreateRequest request) {
+    public ResponseEntity<?> createStudent(@RequestBody StudentCreateRequest request) {
         return new ResponseEntity(studentService.saveStudent(request), HttpStatus.OK);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateStudent(StudentCreateRequest request) {
+    public ResponseEntity<?> updateStudent(@RequestBody StudentCreateRequest request) {
         return new ResponseEntity<>(studentService.UpdateStudent(request), HttpStatus.OK);
     }
 
