@@ -1,9 +1,6 @@
 package com.example.collection.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -12,6 +9,7 @@ import lombok.Data;
 public class ClassStudent {
     @Id
     @Column(name = "class_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String classId;
 
     @Column(name = "class_name")

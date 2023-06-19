@@ -9,6 +9,4 @@ public class JavaCollectionApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaCollectionApplication.class, args);
     }
-
-
 }

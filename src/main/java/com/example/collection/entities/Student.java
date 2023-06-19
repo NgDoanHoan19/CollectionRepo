@@ -13,7 +13,8 @@ import lombok.*;
 public class Student {
     @Id
     @Column(name = "id")
-    private String studentId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long studentId;
 
     @Column(name = "student_name")
     private String studentName;

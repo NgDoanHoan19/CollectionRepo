@@ -2,6 +2,7 @@ package com.example.collection.controller;
 
 
 import com.example.collection.dto.request.StudentCreateRequest;
+import com.example.collection.dto.response.BaseResponse;
 import com.example.collection.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class StudentController {
 
     @GetMapping("get-all")
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity(studentService.getAll(), HttpStatus.OK);
+        return new ResponseEntity(new BaseResponse(studentService.getAll()), HttpStatus.OK);
     }
 
     @PostMapping("/create")

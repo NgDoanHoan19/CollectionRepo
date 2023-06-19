@@ -32,9 +32,9 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public Object saveStudent(StudentCreateRequest request) {
         if (Objects.nonNull(request.getStudentId())) {
-            studentRepository.findById(request.getStudentId()).ifPresent(student -> {
-                throw new ServerException(ApiCode.DUPLICATE_ID_STUDENT);
-            });
+            if(studentRepository.existsById(request.getStudentId())){
+                return new ServerException(ApiCode.DUPLICATE_ID_STUDENT);
+            }
         }
         Student student = new Student();
         student.setStudentId(request.getStudentId());
@@ -69,12 +69,14 @@ public class StudentServiceImpl implements StudentService {
         student1.setUserName(request.getUserName());
         student1.setPassword(request.getPassword());
         studentRepository.save(student1);
-        return null;
+        return new BaseResponse(ApiCode.SUCCESS, student1);
     }
 
     @Override
     public Object findStudentById(Long id) {
-        return null;
+        return studentRepository.findById(id).orElseThrow(() ->{
+                throw new ServerException(ApiCode.NOT_FOUND);}
+        );
     }
 
     @Override
