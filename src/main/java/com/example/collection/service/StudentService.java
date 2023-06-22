@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 public interface StudentService {
-    Object getAll();
+    Object getAll(String name);
 
     Object saveStudent(StudentCreateRequest request);
 

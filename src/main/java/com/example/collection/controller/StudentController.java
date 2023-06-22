@@ -20,8 +20,8 @@ public class StudentController {
     }
 
     @GetMapping("get-all")
-    public ResponseEntity<?> getAll() {
-        return new ResponseEntity(new BaseResponse(studentService.getAll()), HttpStatus.OK);
+    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "") String name) {
+        return new ResponseEntity(new BaseResponse(studentService.getAll(name)), HttpStatus.OK);
     }
 
     @PostMapping("/create")

@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 public enum ApiCode {
     SUCCESS(HttpStatus.OK, "200","Thành Công!"),
     NOT_FOUND(HttpStatus.NOT_FOUND, "404","Not Found"),
-    DUPLICATE_ID_STUDENT(HttpStatus.OK, "409", "Id sinh viên đã tồn tại"),
     STUDENT_NOT_FOUND(HttpStatus.OK,"301","Không tồn tại học sinh có mã ID này!");
 
 

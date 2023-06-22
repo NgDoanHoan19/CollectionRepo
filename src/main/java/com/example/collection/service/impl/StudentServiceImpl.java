@@ -25,18 +25,13 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public Object getAll() {
-        return studentRepository.findAll();
+    public Object getAll(String name) {
+        return studentRepository.findByStudentNameContaining(name);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Object saveStudent(StudentCreateRequest request) {
-        if (Objects.nonNull(request.getStudentId())) {
-            if (studentRepository.existsById(request.getStudentId())) {
-                return new ServerException(ApiCode.DUPLICATE_ID_STUDENT);
-            }
-        }
         Student student = new Student();
         saveToStudent(request, student);
         return new BaseResponse(ApiCode.SUCCESS, student);
@@ -56,12 +51,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Object findStudentById(Long id) {
-        return studentRepository.findById(id).orElseThrow(() -> new ServerException(ApiCode.NOT_FOUND));
+        return studentRepository.findById(id).orElseThrow(() -> new ServerException(ApiCode.STUDENT_NOT_FOUND));
     }
 
     @Override
     public void deleteStudent(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new ServerException(ApiCode.NOT_FOUND));
+        Student student = studentRepository.findById(id).orElseThrow(() -> new ServerException(ApiCode.STUDENT_NOT_FOUND));
         studentRepository.delete(student);
     }
 
