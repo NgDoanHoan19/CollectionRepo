@@ -7,14 +7,14 @@ import com.example.collection.entities.Student;
 import com.example.collection.exception.ServerException;
 import com.example.collection.repository.StudentRepository;
 import com.example.collection.service.StudentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
@@ -39,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object UpdateStudent(StudentCreateRequest request) {
+    public Object updateStudent(StudentCreateRequest request) {
         Optional<Student> student = studentRepository.findById(request.getStudentId());
         if (!student.isPresent()) {
             return new ServerException(ApiCode.STUDENT_NOT_FOUND);
@@ -60,16 +60,34 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.delete(student);
     }
 
-    private void saveToStudent(StudentCreateRequest request, Student student) {
-        student.setStudentName(request.getStudentName());
-        student.setStudentEmail(request.getStudentEmail());
-        student.setClassStudent(request.getClassStudent());
-        student.setStudentAddress(request.getStudentAddress());
-        student.setGender(request.getGender());
-        student.setAge(request.getAge());
-        student.setCpa(request.getCpa());
-        student.setUserName(request.getUserName());
-        student.setPassword(request.getPassword());
-        studentRepository.save(student);
+    public Object saveToStudent(StudentCreateRequest request, Student student) {
+        if (validate(request)) {
+            student.setStudentName(request.getStudentName());
+            student.setStudentEmail(request.getStudentEmail());
+            student.setClassStudent(request.getClassStudent());
+            student.setStudentAddress(request.getStudentAddress());
+            student.setGender(request.getGender());
+            student.setAge(request.getAge());
+            student.setCpa(request.getCpa());
+            student.setUserName(request.getUserName());
+            student.setPassword(request.getPassword());
+            studentRepository.save(student);
+            return student;
+        } else {
+            return new BaseResponse(ApiCode.FAIL);
+        }
+    }
+
+    public boolean validate(StudentCreateRequest request) {
+        if (!("nam".equals(request.getGender()) || "nu".equals(request.getGender()))) {
+            throw new ServerException(ApiCode.VALIDATE_GENDER);
+        }
+        if (request.getAge() < 0 || request.getAge() > 100) {
+            throw new ServerException(ApiCode.VALIDATE_AGE);
+        }
+        if (request.getCpa() < 0.0 || request.getCpa() > 4.0) {
+            throw new ServerException(ApiCode.VALIDATE_CPA);
+        }
+        return true;
     }
 }

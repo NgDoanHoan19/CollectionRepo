@@ -1,7 +1,6 @@
 package com.example.collection.controller;
 
 
-import com.example.collection.constain.ApiCode;
 import com.example.collection.dto.request.StudentCreateRequest;
 import com.example.collection.dto.response.BaseResponse;
 import com.example.collection.service.StudentService;
@@ -31,7 +30,7 @@ public class StudentController {
 
     @PostMapping("/update")
     public ResponseEntity<?> updateStudent(@RequestBody StudentCreateRequest request) {
-        return new ResponseEntity<>(studentService.UpdateStudent(request), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.updateStudent(request), HttpStatus.OK);
     }
 
     @GetMapping("/get-detail/{id}")

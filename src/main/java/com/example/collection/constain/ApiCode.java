@@ -3,9 +3,13 @@ package com.example.collection.constain;
 import org.springframework.http.HttpStatus;
 
 public enum ApiCode {
-    SUCCESS(HttpStatus.OK, "200","Thành Công!"),
-    NOT_FOUND(HttpStatus.NOT_FOUND, "404","Not Found"),
-    STUDENT_NOT_FOUND(HttpStatus.OK,"301","Không tồn tại học sinh có mã ID này!");
+    SUCCESS(HttpStatus.OK, "200", "Thành Công!"),
+    NOT_FOUND(HttpStatus.NOT_FOUND, "404", "Not Found"),
+    VALIDATE_AGE(HttpStatus.OK, "305", "Tuổi Không Hợp Lệ !"),
+    VALIDATE_GENDER(HttpStatus.OK, "305", "Giới Tính Không Hợp Lệ!"),
+    VALIDATE_CPA(HttpStatus.OK, "305", "CPA Không Hợp lệ !"),
+    FAIL(HttpStatus.OK,"303","Đối tượng truyền vào không hợp lệ"),
+    STUDENT_NOT_FOUND(HttpStatus.OK, "301", "Không tồn tại học sinh có mã ID này!");
 
 
     private HttpStatus status;

@@ -10,7 +10,7 @@ public interface StudentService {
 
     Object saveStudent(StudentCreateRequest request);
 
-    Object UpdateStudent(StudentCreateRequest request);
+    Object updateStudent(StudentCreateRequest request);
 
     Object findStudentById(Long id);
 
