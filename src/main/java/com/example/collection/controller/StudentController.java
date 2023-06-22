@@ -1,6 +1,7 @@
 package com.example.collection.controller;
 
 
+import com.example.collection.constain.ApiCode;
 import com.example.collection.dto.request.StudentCreateRequest;
 import com.example.collection.dto.response.BaseResponse;
 import com.example.collection.service.StudentService;
@@ -33,14 +34,14 @@ public class StudentController {
         return new ResponseEntity<>(studentService.UpdateStudent(request), HttpStatus.OK);
     }
 
-    @GetMapping("get-detail")
+    @GetMapping("/get-detail/{id}")
     public ResponseEntity<?> getDetail(@PathVariable Long id) {
         return new ResponseEntity<>(studentService.findStudentById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponse(), HttpStatus.OK);
     }
 }

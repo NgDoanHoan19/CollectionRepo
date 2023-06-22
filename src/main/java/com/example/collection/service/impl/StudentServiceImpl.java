@@ -10,6 +10,7 @@ import com.example.collection.service.StudentService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,12 +33,39 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public Object saveStudent(StudentCreateRequest request) {
         if (Objects.nonNull(request.getStudentId())) {
-            if(studentRepository.existsById(request.getStudentId())){
+            if (studentRepository.existsById(request.getStudentId())) {
                 return new ServerException(ApiCode.DUPLICATE_ID_STUDENT);
             }
         }
         Student student = new Student();
-        student.setStudentId(request.getStudentId());
+        saveToStudent(request, student);
+        return new BaseResponse(ApiCode.SUCCESS, student);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object UpdateStudent(StudentCreateRequest request) {
+        Optional<Student> student = studentRepository.findById(request.getStudentId());
+        if (!student.isPresent()) {
+            return new ServerException(ApiCode.STUDENT_NOT_FOUND);
+        }
+        Student studentUpdate = student.get();
+        saveToStudent(request, studentUpdate);
+        return new BaseResponse(ApiCode.SUCCESS, studentUpdate);
+    }
+
+    @Override
+    public Object findStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new ServerException(ApiCode.NOT_FOUND));
+    }
+
+    @Override
+    public void deleteStudent(Long id) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new ServerException(ApiCode.NOT_FOUND));
+        studentRepository.delete(student);
+    }
+
+    private void saveToStudent(StudentCreateRequest request, Student student) {
         student.setStudentName(request.getStudentName());
         student.setStudentEmail(request.getStudentEmail());
         student.setClassStudent(request.getClassStudent());
@@ -48,39 +76,5 @@ public class StudentServiceImpl implements StudentService {
         student.setUserName(request.getUserName());
         student.setPassword(request.getPassword());
         studentRepository.save(student);
-        return new BaseResponse(ApiCode.SUCCESS, student);
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Object UpdateStudent(StudentCreateRequest request) {
-        Optional<Student> student = studentRepository.findById(request.getStudentId());
-        if(!student.isPresent()){
-            return new ServerException(ApiCode.STUDENT_NOT_FOUND);
-        }
-        Student student1 = new Student();
-        student1.setStudentName(request.getStudentName());
-        student1.setStudentEmail(request.getStudentEmail());
-        student1.setClassStudent(request.getClassStudent());
-        student1.setStudentAddress(request.getStudentAddress());
-        student1.setGender(request.getGender());
-        student1.setAge(request.getAge());
-        student1.setCpa(request.getCpa());
-        student1.setUserName(request.getUserName());
-        student1.setPassword(request.getPassword());
-        studentRepository.save(student1);
-        return new BaseResponse(ApiCode.SUCCESS, student1);
-    }
-
-    @Override
-    public Object findStudentById(Long id) {
-        return studentRepository.findById(id).orElseThrow(() ->{
-                throw new ServerException(ApiCode.NOT_FOUND);}
-        );
-    }
-
-    @Override
-    public void deleteStudent(Long id) {
-
     }
 }

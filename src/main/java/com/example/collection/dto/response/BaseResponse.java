@@ -43,4 +43,10 @@ public class BaseResponse<T> {
         this.message = apiCode.getMessage();
         this.data = data;
     }
+
+    public BaseResponse(String status, String code, String message) {
+        this.status = status;
+        this.message = message;
+        this.code = code;
+    }
 }
