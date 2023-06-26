@@ -3,10 +3,8 @@ package com.example.collection.controller;
 import com.example.collection.service.impl.KafkaConsumerService;
 import com.example.collection.service.impl.KafkaProducerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/kafka/student")
@@ -21,8 +19,14 @@ public class KafkaProducerController {
     }
 
     @PostMapping("/publish")
-    public ResponseEntity<String> sendMessage(@RequestBody String message){
+    public ResponseEntity<String> sendMessage(@RequestBody String message) {
         kafkaProducerService.sendMessage(message);
         return ResponseEntity.ok("Message sent into kafka success!");
+    }
+
+    @PostMapping("/send-data")
+    public ResponseEntity<?> sendData(@RequestParam("file") MultipartFile file) {
+        kafkaProducerService.sendData(file);
+        return ResponseEntity.ok("Data sent into kafka success!");
     }
 }

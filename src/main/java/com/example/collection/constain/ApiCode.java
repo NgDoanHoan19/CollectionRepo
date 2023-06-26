@@ -9,6 +9,7 @@ public enum ApiCode {
     VALIDATE_GENDER(HttpStatus.OK, "305", "Giới Tính Không Hợp Lệ!"),
     VALIDATE_CPA(HttpStatus.OK, "305", "CPA Không Hợp lệ !"),
     FAIL(HttpStatus.OK,"303","Đối tượng truyền vào không hợp lệ"),
+    UNKNOWN_ERROR(HttpStatus.OK,"500","Internal Server Error"),
     STUDENT_NOT_FOUND(HttpStatus.OK, "301", "Không tồn tại học sinh có mã ID này!");
 
 
