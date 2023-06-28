@@ -41,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public Object updateStudent(StudentCreateRequest request) {
         Optional<Student> student = studentRepository.findById(request.getStudentId());
-        if (!student.isPresent()) {
+        if (student.isEmpty()) {
             return new ServerException(ApiCode.STUDENT_NOT_FOUND);
         }
         Student studentUpdate = student.get();

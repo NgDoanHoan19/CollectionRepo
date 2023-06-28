@@ -19,7 +19,7 @@ public class StudentController {
     }
 
     @GetMapping("get-all")
-    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "") String name) {
+    public ResponseEntity<?> getAllStudent(@RequestParam(defaultValue = "") String name) {
         return new ResponseEntity(new BaseResponse(studentService.getAll(name)), HttpStatus.OK);
     }
 
