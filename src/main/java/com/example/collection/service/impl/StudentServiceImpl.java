@@ -60,7 +60,7 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.delete(student);
     }
 
-    public Object saveToStudent(StudentCreateRequest request, Student student) {
+    public void saveToStudent(StudentCreateRequest request, Student student) {
         if (validate(request)) {
             student.setStudentName(request.getStudentName());
             student.setStudentEmail(request.getStudentEmail());
@@ -72,9 +72,8 @@ public class StudentServiceImpl implements StudentService {
             student.setUserName(request.getUserName());
             student.setPassword(request.getPassword());
             studentRepository.save(student);
-            return student;
         } else {
-            return new BaseResponse(ApiCode.FAIL);
+            throw new ServerException(ApiCode.FAIL);
         }
     }
 
