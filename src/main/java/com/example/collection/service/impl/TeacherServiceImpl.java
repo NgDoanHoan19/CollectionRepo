@@ -2,16 +2,21 @@ package com.example.collection.service.impl;
 
 
 import com.example.collection.dto.request.TeacherCreateRequest;
+import com.example.collection.repository.TeacherRepository;
 import com.example.collection.service.TeacherService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class TeacherServiceImpl implements TeacherService {
+    private final TeacherRepository teacherRepository;
+
+    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
+    }
+
     @Override
-    public List<TeacherService> getTeacher(String name) {
-        return null;
+    public Object getTeacher(String name) {
+        return teacherRepository.findByTeacherNameContaining(name);
     }
 
     @Override
