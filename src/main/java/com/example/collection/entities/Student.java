@@ -17,7 +17,7 @@ public class Student {
     private Long studentId;
 
     @Column(name = "student_name")
-    private String studentName;
+    private String fullName;
 
     @Column(name = "gender")
     private String gender;

@@ -26,7 +26,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Object getAll(String name) {
-        return studentRepository.findByStudentNameContaining(name);
+        return studentRepository.findByFullNameContaining(name);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
 
     public void saveToStudent(StudentCreateRequest request, Student student) {
         if (validate(request)) {
-            student.setStudentName(request.getStudentName());
+            student.setFullName(request.getStudentName());
             student.setStudentEmail(request.getStudentEmail());
             student.setClassStudent(request.getClassStudent());
             student.setStudentAddress(request.getStudentAddress());
