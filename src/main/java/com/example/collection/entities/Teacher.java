@@ -34,8 +34,8 @@ public class Teacher {
     @Column(name = "subject")
     private String subject;
 
-    @Column(name = "class_manager")
-    private String classManager;
+    @Column(name = "class_manager_id")
+    private Integer classManagerID;
 
     @Column(name = "User_name")
     private String userName;

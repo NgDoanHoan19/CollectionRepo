@@ -66,7 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
             teacher.setGender(request.getGender());
             teacher.setTeacherAddress(request.getTeacherAddress());
             teacher.setTeacherEmail(request.getTeacherEmail());
-            teacher.setClassManager(request.getClassManager());
+            teacher.setClassManagerID(request.getClassManagerId());
             teacher.setSubject(request.getSubject());
             teacher.setSalary(request.getSalary());
             teacher.setUserName(request.getUserName());
@@ -78,11 +78,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     public boolean validateRequest(TeacherCreateRequest request) {
+        if (!("nam".equals(request.getGender()) || "nu".equals(request.getGender()))) {
+            throw new ServerException(ApiCode.VALIDATE_GENDER);
+        }
         if (Objects.isNull(request.getAge()) || request.getAge() < 0 || request.getAge() > 100) {
             throw new ServerException(ApiCode.VALIDATE_AGE);
-        }
-        if (!"nam".equals(request.getGender()) || !"nu".equals(request.getGender())) {
-            throw new ServerException(ApiCode.VALIDATE_GENDER);
         }
         if (request.getSalary() < 0) {
             throw new ServerException(ApiCode.VALIDATE_SALARY);

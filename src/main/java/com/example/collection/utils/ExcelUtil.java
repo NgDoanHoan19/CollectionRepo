@@ -34,7 +34,7 @@ public class ExcelUtil {
                     Cell currentCell = cellRows.next();
                     switch (cellIndex) {
                         case 0:
-                            studentCreateRequest.setStudentName(dataFormatter.formatCellValue(currentCell));
+                            studentCreateRequest.setFullName(dataFormatter.formatCellValue(currentCell));
                             break;
                         case 1:
                             studentCreateRequest.setGender(dataFormatter.formatCellValue(currentCell));
@@ -52,7 +52,7 @@ public class ExcelUtil {
                             studentCreateRequest.setCpa(currentCell.getNumericCellValue());
                             break;
                         case 6:
-                            studentCreateRequest.setClassStudent(dataFormatter.formatCellValue(currentCell));
+                            studentCreateRequest.setClassId(Integer.parseInt(dataFormatter.formatCellValue(currentCell)));
                             break;
                         case 7:
                             studentCreateRequest.setUserName(dataFormatter.formatCellValue(currentCell));

@@ -34,8 +34,8 @@ public class Student {
     @Column(name = "cpa")
     private Double cpa;
 
-    @Column(name = "class_student")
-    private String classStudent;
+    @Column(name = "class_id")
+    private Integer classId;
 
     @Column(name = "user_name")
     private String userName;

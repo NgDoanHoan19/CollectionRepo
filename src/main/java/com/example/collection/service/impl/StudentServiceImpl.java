@@ -62,9 +62,9 @@ public class StudentServiceImpl implements StudentService {
 
     public void saveToStudent(StudentCreateRequest request, Student student) {
         if (validate(request)) {
-            student.setFullName(request.getStudentName());
+            student.setFullName(request.getFullName());
             student.setStudentEmail(request.getStudentEmail());
-            student.setClassStudent(request.getClassStudent());
+            student.setClassId(request.getClassId());
             student.setStudentAddress(request.getStudentAddress());
             student.setGender(request.getGender());
             student.setAge(request.getAge());

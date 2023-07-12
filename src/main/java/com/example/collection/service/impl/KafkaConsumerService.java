@@ -27,6 +27,6 @@ public class KafkaConsumerService {
     public void consume(String message){
         logger.info("data received!");
         List<Student> students = Arrays.asList(new GsonBuilder().create().fromJson(message, Student[].class));
-        students.forEach(student -> studentRepository.save(student));
+        studentRepository.saveAll(students);
     }
 }

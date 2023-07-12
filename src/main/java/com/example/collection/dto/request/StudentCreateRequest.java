@@ -5,13 +5,13 @@ import lombok.Data;
 @Data
 public class StudentCreateRequest {
     private Long studentId;
-    private String studentName;
+    private String fullName;
     private String gender;
     private Integer age;
     private String studentEmail;
     private String studentAddress;
     private Double cpa;
-    private String classStudent;
+    private Integer classId;
     private String userName;
     private String password;
 
