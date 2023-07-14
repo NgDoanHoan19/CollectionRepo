@@ -1,6 +1,7 @@
 package com.example.collection.service.impl;
 
 import com.example.collection.constain.ApiCode;
+import com.example.collection.dto.request.GetAllStudentRequest;
 import com.example.collection.dto.request.StudentCreateRequest;
 import com.example.collection.dto.response.BaseResponse;
 import com.example.collection.entities.Student;
@@ -8,9 +9,13 @@ import com.example.collection.exception.ServerException;
 import com.example.collection.repository.StudentRepository;
 import com.example.collection.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -25,8 +30,18 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public Object getAll(String name) {
-        return studentRepository.findByFullNameContaining(name);
+    public Object getAll(GetAllStudentRequest request) {
+        String name = Objects.nonNull(request.getName()) ? request.getName() : "";
+        int pageNum = Objects.nonNull(request.getPageNum()) ? request.getPageNum() : 0;
+        int pageSize = Objects.nonNull(request.getPageSize()) ? request.getPageSize() : 10;
+        String sortField = Objects.nonNull(request.getSortField()) ? request.getSortField() : "id";
+        String sortDirection = Objects.nonNull(request.getSortDirection()) ? request.getSortDirection() : "desc";
+        Sort sort = Sort.by(sortField);
+        if ("desc".equals(sortDirection)) {
+            sort = sort.descending();
+        }
+        Pageable pageable = PageRequest.of(pageNum, pageSize, sort);
+        return studentRepository.getAll(name.toLowerCase(), pageable);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.collection.controller;
 
 
+import com.example.collection.dto.request.GetAllStudentRequest;
 import com.example.collection.dto.request.StudentCreateRequest;
 import com.example.collection.dto.response.BaseResponse;
 import com.example.collection.service.StudentService;
@@ -19,8 +20,8 @@ public class StudentController {
     }
 
     @GetMapping("get-all")
-    public ResponseEntity<?> getAllStudent(@RequestParam(defaultValue = "") String name) {
-        return new ResponseEntity(new BaseResponse(studentService.getAll(name)), HttpStatus.OK);
+    public ResponseEntity<?> getAllStudent(@RequestBody GetAllStudentRequest request) {
+        return new ResponseEntity(new BaseResponse(studentService.getAll(request)), HttpStatus.OK);
     }
 
     @PostMapping("/create")

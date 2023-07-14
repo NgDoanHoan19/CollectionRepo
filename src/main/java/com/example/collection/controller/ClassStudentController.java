@@ -1,6 +1,5 @@
 package com.example.collection.controller;
 
-import com.example.collection.constain.ApiCode;
 import com.example.collection.dto.response.BaseResponse;
 import com.example.collection.service.ClassService;
 import org.springframework.http.HttpStatus;

@@ -9,4 +9,5 @@ public interface StudentDto {
     String getStudentAddress();
     Double getCpa();
     String getClassName();
+    String getTeacherName();
 }
