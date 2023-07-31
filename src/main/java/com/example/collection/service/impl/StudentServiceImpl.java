@@ -49,7 +49,7 @@ public class StudentServiceImpl implements StudentService {
     public Object saveStudent(StudentCreateRequest request) {
         Student student = new Student();
         saveToStudent(request, student);
-        return new BaseResponse(ApiCode.SUCCESS, student);
+        return new BaseResponse<>(ApiCode.SUCCESS, student);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
         }
         Student studentUpdate = student.get();
         saveToStudent(request, studentUpdate);
-        return new BaseResponse(ApiCode.SUCCESS, studentUpdate);
+        return new BaseResponse<>(ApiCode.SUCCESS, studentUpdate);
     }
 
     @Override

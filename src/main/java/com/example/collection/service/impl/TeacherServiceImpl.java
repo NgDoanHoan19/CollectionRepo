@@ -10,8 +10,10 @@ import com.example.collection.repository.TeacherRepository;
 import com.example.collection.service.TeacherService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -25,7 +27,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Object getTeacher(String name) {
-        return teacherRepository.findByTeacherNameContaining(name);
+        List<Teacher> teacherList = teacherRepository.findByTeacherNameContaining(name);
+        return teacherList.stream().filter(teacher -> teacher.getSalary() > 150 && teacher.getAge() < 40).sorted().collect(Collectors.toList());
     }
 
     @Override
@@ -35,7 +38,7 @@ public class TeacherServiceImpl implements TeacherService {
         }
         Teacher teacher = new Teacher();
         saveTeacher(request, teacher);
-        return new BaseResponse(ApiCode.SUCCESS, teacher);
+        return new BaseResponse<>(ApiCode.SUCCESS, teacher);
     }
 
     @Override
@@ -46,7 +49,7 @@ public class TeacherServiceImpl implements TeacherService {
         }
         Teacher teacher = teacherOptional.get();
         saveTeacher(request, teacher);
-        return new BaseResponse(ApiCode.SUCCESS, teacher);
+        return new BaseResponse<>(ApiCode.SUCCESS, teacher);
     }
 
     @Override
