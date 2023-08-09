@@ -37,6 +37,9 @@ public class KafkaProducerService {
     public void sendData(MultipartFile file) {
         try {
             InputStream inputStream = file.getInputStream();
+
+
+
             List<StudentCreateRequest> studentList = ExcelUtil.excelStudent(inputStream);
             Gson gson = new Gson();
             String jsonData = gson.toJson(studentList);
