@@ -23,7 +23,7 @@ public class KafkaConsumerService {
         this.studentRepository = studentRepository;
     }
 
-    @KafkaListener(topics = Constants.TOPIC_NAME, groupId = Constants.GROUP_ID)
+    //@KafkaListener(topics = Constants.TOPIC_NAME, groupId = Constants.GROUP_ID)
     public void consume(String message){
         logger.info("data received!");
         List<Student> students = Arrays.asList(new GsonBuilder().create().fromJson(message, Student[].class));
